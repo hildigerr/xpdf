@@ -43,6 +43,10 @@ class GString;
 // Get home directory path.
 extern GString *getHomeDir();
 
+// Get XDG base paths.
+extern GString *getUserConfigDir();
+extern GString *getUserCacheDir();
+
 // Get current directory.
 extern GString *getCurrentDir();
 

@@ -817,7 +817,7 @@ GlobalParams::GlobalParams(const char *cfgFileName) {
     }
   }
   if (!f) {
-    fileName = appendToPath(getHomeDir(), xpdfUserConfigFile);
+    fileName = appendToPath(getUserConfigDir(), xpdfUserConfigFile);
     if (!(f = fopen(fileName->getCString(), "r"))) {
       delete fileName;
     }
@@ -1037,14 +1037,13 @@ void GlobalParams::initStateFilePaths() {
   }
   GString *dir = appendToPath(new GString(path), "xpdf");
   CreateDirectoryA(dir->getCString(), NULL);
+#else
+  GString *dir = appendToPath(getUserCacheDir(), "xpdf");
+  createDir(dir->getCString(), 0700);
+#endif
   pagesFile = appendToPath(dir->copy(), "xpdf.pages");
   tabStateFile = appendToPath(dir->copy(), "xpdf.tab-state");
   sessionFile = appendToPath(dir, "xpdf.session");
-#else
-  pagesFile = appendToPath(getHomeDir(), ".xpdf.pages");
-  tabStateFile = appendToPath(getHomeDir(), ".xpdf.tab-state");
-  sessionFile = appendToPath(getHomeDir(), ".xpdf.session");
-#endif
 }
 
 void GlobalParams::parseFile(GString *fileName, FILE *f) {

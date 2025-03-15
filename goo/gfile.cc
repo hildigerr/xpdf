@@ -99,6 +99,34 @@ GString *getHomeDir() {
 #endif
 }
 
+GString *getUserConfigDir() {
+  char *s;
+  GString *ret = NULL;
+
+#ifdef _WIN32
+  return getHomeDir();
+#endif
+
+  if ((s = getenv("XDG_CONFIG_HOME"))) {
+    ret = new GString(s);
+  } else {
+    ret = appendToPath(getHomeDir(), ".config");
+  }
+  return ret;
+}
+
+GString *getUserCacheDir() {
+  char *s;
+  GString *ret = NULL;
+
+  if ((s = getenv("XDG_CACHE_HOME"))) {
+    ret = new GString(s);
+  } else {
+    ret = appendToPath(getHomeDir(), ".cache");
+  }
+  return ret;
+}
+
 GString *getCurrentDir() {
   char buf[PATH_MAX+1];
 

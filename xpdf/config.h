@@ -51,12 +51,8 @@
 // config file (xpdfrc) path
 //------------------------------------------------------------------------
 
-// user config file name, relative to the user's home directory
-#if defined(VMS) || defined(_WIN32)
+// user config file name
 #define xpdfUserConfigFile "xpdfrc"
-#else
-#define xpdfUserConfigFile ".xpdfrc"
-#endif
 
 // system config file name (set via the configure script)
 #if defined(_WIN32)
