@@ -817,7 +817,9 @@ GlobalParams::GlobalParams(const char *cfgFileName) {
     }
   }
   if (!f) {
-    fileName = appendToPath(getUserConfigDir(), xpdfUserConfigFile);
+    GString *dir = appendToPath(getUserConfigDir(), "xpdf");
+    createDir(dir->getCString(), 0700);
+    fileName = appendToPath(dir, xpdfUserConfigFile);
     if (!(f = fopen(fileName->getCString(), "r"))) {
       delete fileName;
     }
